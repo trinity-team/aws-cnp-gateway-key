@@ -6,7 +6,8 @@ The impetus for this requirement stems from the way KMS keys and EBS volume encr
 
 The diagram below depicts these requirements visually for an example environment where we are replicating instance snapshots from us-west-2 in Account A to us-east-2 in Account B. With this configuration, the environment has the necessary permissions to protect instances and volumes within the us-west-2 region of account A while replicating those snapshots to the us-east-2 region of Account B. The keys and shares depicted allow for replication and in place restore regardless of whether the source volumes were encrypted with the default KMS key or a Customer Managed KMS key at the source. More detail on the purposes of each key is provided below.
 
-![image](https://user-images.githubusercontent.com/16825470/107416464-84e9cc80-6ae2-11eb-967d-a59c14fd42de.png)
+![image](https://user-images.githubusercontent.com/16825470/107691473-78e44300-6c79-11eb-82bc-a2b86507c5dc.png)
+
 
 This configuration allows for the restore of instances and volumes in the the source region of Account A using either the local images and snapshots in that region, or the replicas in the replica region of Account B. This topology is depicted in the diagram below.
 

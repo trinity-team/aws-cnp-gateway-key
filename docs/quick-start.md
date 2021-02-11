@@ -15,9 +15,11 @@ This configuration allows for the restore of instances and volumes in the the so
 
 
 ## Gateway Keys
-Gateway keys are used for two purposes. 1) To encrypt source snapshots of volumes encrypted with the default KMS key in their source region so that they can be replicated to the target account. 2) To encrypt snapshots stored in the replica region at rest. 
+Gateway keys are used for two purposes. 1) To encrypt source snapshots of volumes encrypted with the default KMS key in their source region so that they can be replicated to the target account. 2) To encrypt snapshots stored in the replica region at rest.
 
-When you create a stack using the [CloudFormation Template](/aws-cnp-gateway-key.template) in this repository, CloudFormation will create a rubrik gateway key in that region where you create the stack. This means that that you will need to create two stacks for most use cases, one in the source region of the source account trusting the replica account, and one in the replica region of the replica account targeting the source account. In more complicated configurations, you may need to modify this template to accomodate all of the replication and export flows required.
+When you create a stack using the [CloudFormation Template](/aws-cnp-gateway-key.template) in this repository, CloudFormation will create a rubrik gateway key in that region where you create the stack. This means that that you will need to create two stacks for most use cases, one in the source region of the source account trusting the replica account, and one in the replica region of the replica account targeting the source account. 
+
+That said, in more complicated configurations, you may need to modify this template to accomodate all of the replication and export flows required. Additionally, if no volumes in the source region are encrypted with the default KMS key the gateway in the source region is not required. 
 
 ## Customer CMKs
 Customer CMKs must be shared with the replica account in the region corresponding to the source instance and volumes. These keys are made available to the replica account so that source snapshots encrypted with the CMK can be replicated across accounts. This template does not handle the sharing of these CMKs for you, but there are example [Key Policies](/customer_cmk_key_policy_example.json) you can apply to your KMS keys in order to share them as required above.

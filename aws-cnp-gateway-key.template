@@ -10,11 +10,11 @@ Metadata:
           - sourceaccountid
     ParameterLabels: 
       sourceaccountid: 
-        default: "Source Account ID"
+        default: "Account ID of corresponding AWS account"
 Parameters:
   sourceaccountid:
     Type: String
-    Description: Account number of source AWS Account
+    Description: Account number of corresponding AWS Account
     AllowedPattern: ^\d{12}$
 Resources:
   GatewayKmsKey:
@@ -74,6 +74,6 @@ Resources:
   GatewayKmsAlias:
     Type: AWS::KMS::Alias
     Properties: 
-      AliasName: alias/rk_gateway_key
+      AliasName: alias/rk_cnp_encryption_key
       TargetKeyId: !Ref GatewayKmsKey
   
